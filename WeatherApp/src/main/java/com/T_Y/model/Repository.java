@@ -35,7 +35,7 @@ public class Repository {
         arrOfStr2[0] = arrOfStr[0].substring(122);
         arrOfStr2[1] = arrOfStr[18].substring(135);
         arrOfStr2[2] = arrOfStr[19].substring(132);
-        arrOfStr2[3] = arrOfStr[40].substring(137);//TODO fix this
+        arrOfStr2[3] = arrOfStr[arrOfStr.length - 3].substring(137);//TODO fix this
         arrOfStr2[4] = arrOfStr[2].substring(124);
         arrOfStr2[5] = arrOfStr[6].substring(129);
         arrOfStr2[6] = arrOfStr[7].substring(123);
@@ -55,28 +55,28 @@ public class Repository {
     }
 
     private boolean resultHushCheck(City ct) {
-        if (CityCodeHushMap.forecasts.get(ct.getCityCode()) != null) {
-            long hashTime = CityCodeHushMap.forecasts.get(ct.getCityCode()).getTime();
+        if (CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()) != null) {
+            long hashTime = CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()).getTime();
             //currTime=currTime*1000;
             long currTime = UserCustomizedScreen.rightNow.getTimeInMillis();
             currTime = currTime / 1000;
             if (currTime - hashTime < 60000) {
-                ct.setResult(CityCodeHushMap.forecasts.get(ct.getCityCode()));
+                ct.setResult(CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()));
                 return true;
             } else {
-                CityCodeHushMap.forecasts.remove(ct.getCityCode());
+                CityCodeHushMap.getInstance().getForecasts().remove(ct.getCityCode());
             }
         }
         return false;
     }
 
     private boolean hangoutHushCheck(City ct) {
-        if (CityCodeHushMap.hangouts.get(ct.getCityCode()) != null) {
-            //long hashTime=cityCodeHushMap.forecasts.get(ct.getCityCode()).getTime();
+        if (CityCodeHushMap.getInstance().getHangouts().get(ct.getCityCode()) != null) {
+            //long hashTime=CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()).getTime();
             //currTime=currTime*1000;
             //long currTime=userCustomizedScreen.rightNow.getTimeInMillis();
             //currTime=currTime/1000;
-            ct.setResult(CityCodeHushMap.forecasts.get(ct.getCityCode()));
+            ct.setResult(CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()));
             return true;
         } else {
             return false;
@@ -84,12 +84,12 @@ public class Repository {
     }
 
     private void updateCityHangoutHush(City ct, HangoutsResult[] resultsArr) {
-        CityCodeHushMap.hangouts.put(ct.getCityCode(), resultsArr);
+        CityCodeHushMap.getInstance().getHangouts().put(ct.getCityCode(), resultsArr);
     }
 
 
     private void updateCityForecastsHush(City ct) {
-        CityCodeHushMap.forecasts.put(ct.getCityCode(), ct.getResult());
+        CityCodeHushMap.getInstance().getForecasts().put(ct.getCityCode(), ct.getResult());
 
     }
 
@@ -102,7 +102,7 @@ public class Repository {
         HttpGet get = new HttpGet(url);
         CloseableHttpResponse resp = null;
         if (this.resultHushCheck(ct)) {
-            return CityCodeHushMap.forecasts.get(ct.getCityCode());
+            return CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode());
         }
         try {
             resp = client.execute(get);
@@ -136,7 +136,7 @@ public class Repository {
         HttpGet get = new HttpGet(url);
         CloseableHttpResponse resp = null;
         if (this.hangoutHushCheck(ct)) {
-            return CityCodeHushMap.forecasts.get(ct.getCityCode());
+            return CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode());
         }
         try {
 

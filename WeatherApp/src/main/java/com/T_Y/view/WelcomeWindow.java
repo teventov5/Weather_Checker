@@ -1,5 +1,7 @@
 package com.T_Y.view;
 
+import com.T_Y.controller.CityCodeHushMap;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,6 +20,12 @@ public class WelcomeWindow {
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                CityCodeHushMap.getInstance().stop();
+            }
+        });
 
         JButton btnLogin = new JButton("User Login");
         btnLogin.addMouseListener(new MouseAdapter() {
@@ -95,6 +103,7 @@ public class WelcomeWindow {
         lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblInfo.setBounds(53, 11, 343, 123);
         frame.getContentPane().add(lblInfo);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }

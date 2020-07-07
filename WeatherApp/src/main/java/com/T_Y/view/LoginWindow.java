@@ -14,7 +14,7 @@ public class LoginWindow extends JFrame {
     private static LoginWindow frame;
     private JPanel contentPane;
     private JTextField usernameField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private boolean loginSucceed;
 
     /**
@@ -84,7 +84,7 @@ public class LoginWindow extends JFrame {
         label_1.setBounds(10, 134, 89, 14);
         contentPane.add(label_1);
 
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         passwordField.setColumns(10);
         passwordField.setBounds(116, 133, 148, 30);
         contentPane.add(passwordField);
@@ -102,5 +102,7 @@ public class LoginWindow extends JFrame {
         });
         btnForgotPassword.setBounds(36, 223, 254, 23);
         contentPane.add(btnForgotPassword);
+
+        setLocationRelativeTo(null);
     }
 }

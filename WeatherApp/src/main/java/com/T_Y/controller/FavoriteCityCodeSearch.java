@@ -46,7 +46,7 @@ public class FavoriteCityCodeSearch {
         temp = temp.substring(1, temp.indexOf(",") - 1);
         temp = String.format(temp, "%05");
         ct.setCityCode(temp);
-        // cityCodeHushMap.cityCodes.put(ct.getCityName(),ct.getCityCode());
+        // CityCodeHushMap.getInstance().getCityCodes().put(ct.getCityName(),ct.getCityCode());
 
 
     }

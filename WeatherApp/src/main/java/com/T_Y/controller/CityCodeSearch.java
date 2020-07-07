@@ -46,8 +46,8 @@ public class CityCodeSearch {
     }
 
     private boolean checkCityCodeHush(City ct) {
-        if (CityCodeHushMap.cityCodes.get(ct.getCityName()) != null) {
-            ct.setCityCode(CityCodeHushMap.cityCodes.get(ct.getCityName()));
+        if (CityCodeHushMap.getInstance().getCityCodes().get(ct.getCityName()) != null) {
+            ct.setCityCode(CityCodeHushMap.getInstance().getCityCodes().get(ct.getCityName()));
             return true;
         }
         return false;
@@ -56,7 +56,7 @@ public class CityCodeSearch {
     private void updateCityCodeHush(City ct) {
         Timer timer = new Timer();
         long timeout = 1000_000;
-        CityCodeHushMap.cityCodes.put(ct.getCityName(), ct.getCityCode());
+        CityCodeHushMap.getInstance().getCityCodes().put(ct.getCityName(), ct.getCityCode());
 
     }
 

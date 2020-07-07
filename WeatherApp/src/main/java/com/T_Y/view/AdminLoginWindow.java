@@ -14,7 +14,7 @@ public class AdminLoginWindow extends JFrame {
     private static AdminLoginWindow frame;
     private JPanel contentPane;
     private JTextField usernameField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private boolean loginSucceed;
 
     /**
@@ -85,7 +85,7 @@ public class AdminLoginWindow extends JFrame {
         label_1.setBounds(10, 134, 89, 14);
         contentPane.add(label_1);
 
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         passwordField.setColumns(10);
         passwordField.setBounds(116, 133, 148, 20);
         contentPane.add(passwordField);

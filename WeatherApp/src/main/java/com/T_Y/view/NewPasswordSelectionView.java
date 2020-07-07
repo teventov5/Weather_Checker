@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 public class NewPasswordSelectionView extends JDialog {
 
     private final JPanel contentPanel = new JPanel();
-    private JTextField passwordText;
-    private JTextField password2Text;
+    private JPasswordField passwordText;
+    private JPasswordField password2Text;
 
     /**
      * Create the dialog.
@@ -32,7 +32,7 @@ public class NewPasswordSelectionView extends JDialog {
         lblDescription.setBounds(10, 11, 373, 39);
         contentPanel.add(lblDescription);
 
-        passwordText = new JTextField();
+        passwordText = new JPasswordField();
         passwordText.setBounds(135, 154, 96, 30);
         contentPanel.add(passwordText);
         passwordText.setColumns(10);
@@ -46,7 +46,7 @@ public class NewPasswordSelectionView extends JDialog {
         lblUsername.setBounds(10, 84, 159, 14);
         contentPanel.add(lblUsername);
 
-        password2Text = new JTextField();
+        password2Text = new JPasswordField();
         password2Text.setColumns(10);
         password2Text.setBounds(135, 188, 96, 30);
         contentPanel.add(password2Text);

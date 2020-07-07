@@ -14,7 +14,7 @@ public class RegistrationWindow extends JFrame {
     private static RegistrationWindow frame;
     private JPanel contentPane;
     private JTextField usernameField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private boolean loginSucceed;
     private JTextField secretQuestionField;
     private JTextField secretAnswerField;
@@ -67,7 +67,7 @@ public class RegistrationWindow extends JFrame {
         lblPassword.setBounds(10, 54, 89, 14);
         contentPane.add(lblPassword);
 
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         passwordField.setColumns(10);
         passwordField.setBounds(160, 56, 148, 20);
         contentPane.add(passwordField);
