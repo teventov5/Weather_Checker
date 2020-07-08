@@ -15,6 +15,7 @@ public class NewPasswordSelectionView extends JDialog {
     private final JPanel contentPanel = new JPanel();
     private JPasswordField passwordText;
     private JPasswordField password2Text;
+    private JFrame error;
 
     /**
      * Create the dialog.
@@ -67,7 +68,12 @@ public class NewPasswordSelectionView extends JDialog {
                             String password1 = passwordText.getText();
                             String password2 = password2Text.getText();
                             passwordCheck(password1, password2);
-                            new UsersDB().updateUserPasswordToDB(tempUser, password1);
+                           boolean updateSucceeded= new UsersDB().updateUserPasswordToDB(tempUser, password1);
+                           if(updateSucceeded)
+                           {
+                               JOptionPane.showMessageDialog(error, "Password update succeeded", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+                               dispose();
+                           }
 
                         } catch (Exception e1) {
                             JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);

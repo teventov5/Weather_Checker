@@ -70,7 +70,7 @@ public class UsersDB {
 
     }
 
-    public void loginAdminToDB(User tempUser) throws ClassNotFoundException, SQLException, ArithmeticException {
+    public boolean loginAdminToDB(User tempUser) throws ClassNotFoundException, SQLException, ArithmeticException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/weatherapp?autoReconnect=true&useSSL=false", "root", "");
         PreparedStatement sel = conn.prepareStatement("select username from admins where username=? AND password=?");
@@ -79,9 +79,9 @@ public class UsersDB {
         sel.setString(2, tempUser.getPassword());
         rs = sel.executeQuery();
         if (!rs.next()) {
-            throw new ArithmeticException("username or password is wrong");
+            return false;
         } else {
-            throw new ArithmeticException("Admin Login Allowed");
+            return true;
         }
 
     }
@@ -177,7 +177,7 @@ public class UsersDB {
         return false;
     }
 
-    public void updateUserPasswordToDB(User tempUser, String password) throws ClassNotFoundException, SQLException {
+    public boolean updateUserPasswordToDB(User tempUser, String password) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/weatherapp?autoReconnect=true&useSSL=false", "root", "");
         PreparedStatement ps = conn.prepareStatement("update users set password=? where username=?");
@@ -185,7 +185,7 @@ public class UsersDB {
         ps.setString(2, tempUser.getUsername());
         int updateFlag = ps.executeUpdate();
         if (updateFlag > 0) {
-            throw new ArithmeticException("password was updated");
+            return true;
         } else {
             throw new ArithmeticException("problem updating password for username " + tempUser.getUsername());
         }

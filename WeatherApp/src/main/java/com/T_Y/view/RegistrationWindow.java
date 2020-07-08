@@ -11,11 +11,10 @@ import java.awt.event.ActionListener;
 
 public class RegistrationWindow extends JFrame {
 
-    private static RegistrationWindow frame;
     private JPanel contentPane;
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private boolean loginSucceed;
+    private boolean registrationSucceed;
     private JTextField secretQuestionField;
     private JTextField secretAnswerField;
 
@@ -41,8 +40,12 @@ public class RegistrationWindow extends JFrame {
                 secretAnswerInput = secretAnswerField.getText();
                 try {
                     User tempUser = new User(usernameInput, passwordInput, secretQuestionInput, secretAnswerInput);
-                    new UserManagement().registerUser(tempUser);
 
+                    registrationSucceed= new UserManagement().registerUser(tempUser);
+                    if(registrationSucceed) {
+                        new UserCustomizedScreen(tempUser);
+                        setVisible(false);
+                    }
 
                 } catch (Exception e1) {
                     System.out.println(e1);
@@ -59,7 +62,7 @@ public class RegistrationWindow extends JFrame {
 
         usernameField = new JTextField();
         usernameField.setColumns(10);
-        usernameField.setBounds(160, 14, 148, 20);
+        usernameField.setBounds(160, 14, 148, 30);
         contentPane.add(usernameField);
 
         JLabel lblPassword = new JLabel("Password:");
@@ -69,16 +72,23 @@ public class RegistrationWindow extends JFrame {
 
         passwordField = new JPasswordField();
         passwordField.setColumns(10);
-        passwordField.setBounds(160, 56, 148, 20);
+        passwordField.setBounds(160, 56, 148, 30);
         contentPane.add(passwordField);
 
-        JButton btnForgotPassword = new JButton("Press if you forgot your password");
-        btnForgotPassword.setBounds(59, 207, 254, 23);
-        contentPane.add(btnForgotPassword);
+        JButton btnWelcomeScreen = new JButton("Press if you want to go back to welcome screen");
+        btnWelcomeScreen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new WelcomeWindow();
+                dispose();
+
+            }
+        });
+        btnWelcomeScreen.setBounds(30, 207, 300, 50);
+        contentPane.add(btnWelcomeScreen);
 
         secretQuestionField = new JTextField();
         secretQuestionField.setColumns(10);
-        secretQuestionField.setBounds(160, 103, 148, 20);
+        secretQuestionField.setBounds(160, 103, 148, 30);
         contentPane.add(secretQuestionField);
 
         JLabel lblSecretQuestion = new JLabel("Secret Question:");
@@ -88,7 +98,7 @@ public class RegistrationWindow extends JFrame {
 
         secretAnswerField = new JTextField();
         secretAnswerField.setColumns(10);
-        secretAnswerField.setBounds(160, 141, 148, 20);
+        secretAnswerField.setBounds(160, 141, 148, 30);
         contentPane.add(secretAnswerField);
 
         JLabel lblSecretAnswer = new JLabel("Secret Answer:");

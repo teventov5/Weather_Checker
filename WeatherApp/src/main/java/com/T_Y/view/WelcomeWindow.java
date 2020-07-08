@@ -49,14 +49,7 @@ public class WelcomeWindow {
         btnLogin.setBounds(53, 177, 124, 23);
         frame.getContentPane().add(btnLogin);
         JButton btnAdminLogin = new JButton("Admin Login");
-        btnAdminLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                AdminLoginWindow AdminLoginWindow = new AdminLoginWindow();
-                frame.setVisible(false);
-            }
-        });
-        btnLogin.addMouseListener(new MouseAdapter() {
+        btnAdminLogin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 lblInfo.setText(convertToMultiline("Use this button to go to Admin login page"));
@@ -68,7 +61,7 @@ public class WelcomeWindow {
             }
 
             public void mouseClicked(MouseEvent e1) {
-                LoginWindow LoginWindow = new LoginWindow();
+                new AdminLoginWindow();
                 frame.setVisible(false);
             }
 
@@ -81,7 +74,7 @@ public class WelcomeWindow {
         btnRegister.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                lblInfo.setText(convertToMultiline("Use this button to go to registration page"));
+                lblInfo.setText(convertToMultiline("Use this button to go to User registration page"));
             }
 
             @Override
@@ -108,20 +101,6 @@ public class WelcomeWindow {
 
     }
 
-    /**
-     * public static void main(String[] args) {
-     * EventQueue.invokeLater(new Runnable() {
-     * public void run() {
-     * try {
-     * window = new com.shar.view.WelcomeWindow();
-     * window.frame.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     * }
-     * });
-     * }
-     */
     public static String convertToMultiline(String orig) {
         return "<html>" + orig.replaceAll("\n", "<br>");
     }

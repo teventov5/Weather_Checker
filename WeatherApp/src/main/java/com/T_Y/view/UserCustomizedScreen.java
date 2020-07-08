@@ -28,22 +28,21 @@ public class UserCustomizedScreen extends JFrame {
     private ImageIcon icon;
     private UserFavoritesView userFavoritesView;
     private JLabel lblTime;
+    private int index=0;
 
     /**
      * Create the frame.
      */
     public UserCustomizedScreen(User tempUser) throws IOException {
+        setVisible(true);
         rightNow = Calendar.getInstance();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel lblIcon = new JLabel("");
-        setBounds(100, 100, 799, 596);
+        setBounds(100, 100, 533, 455);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
-        rigidArea.setBounds(0, 0, 785, 559);
-        contentPane.add(rigidArea);
 
         JList favoritesList = new JList();
         favoritesList.addListSelectionListener(new ListSelectionListener() {
@@ -54,18 +53,18 @@ public class UserCustomizedScreen extends JFrame {
                 rightNow.setTime(Calendar.getInstance().getTime());
                 lblTime.setText(rightNow.getTime().toString());
 
-                int index = favoritesList.getAnchorSelectionIndex();
+                index = favoritesList.getAnchorSelectionIndex();
                 //String [] resultArr={"31/05/2020","rainy","29","13"};
                 //forcastResult result=new forcastResult(resultArr);
 
                 result = new CitySearch().searchForCityResult(favoritesList.getModel().getElementAt(index).toString());
-                lblHeadlineText.setText(result.getHeadline());
-                lblCurrTemperatureText.setText(result.getMinTemperature());
+                lblHeadlineText.setText(result.getHeadline()+" Weather");
+                lblCurrTemperatureText.setText(result.getMinTemperature()+"°");
                 try {
                     image = ImageIO.read(new File("images\\" + result.getIconNumber() + ".png"));
                     icon = new ImageIcon(image);
                     lblIcon.setIcon(icon);
-                    lblIcon.setBounds(545, 137, 100, 86);
+                    lblIcon.setBounds(270, 137, 100, 86);
                     contentPane.add(lblIcon);
                 } catch (IOException ex) {
                     System.out.println(ex);
@@ -88,27 +87,22 @@ public class UserCustomizedScreen extends JFrame {
             }
         });
         favoritesList.setFont(new Font("Tahoma", Font.PLAIN, 27));
-        favoritesList.setBounds(10, 297, 271, 229);
+        favoritesList.setBounds(0, 129, 271, 229);
         contentPane.add(favoritesList);
-
-        JLabel lblHeadline = new JLabel("Headline:");
-        lblHeadline.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        lblHeadline.setBounds(509, 11, 152, 66);
-        contentPane.add(lblHeadline);
 
         lblHeadlineText = new JLabel("");
         lblHeadlineText.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblHeadlineText.setBounds(427, 68, 340, 152);
+        lblHeadlineText.setBounds(270, 186, 175, 53);
         contentPane.add(lblHeadlineText);
 
-        JLabel lblCurrTemperature = new JLabel("Current temperature");
-        lblCurrTemperature.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        lblCurrTemperature.setBounds(463, 297, 295, 95);
+        JLabel lblCurrTemperature = new JLabel("Current temperature:");
+        lblCurrTemperature.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
+        lblCurrTemperature.setBounds(270, 224, 197, 53);
         contentPane.add(lblCurrTemperature);
 
         lblCurrTemperatureText = new JLabel("");
-        lblCurrTemperatureText.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        lblCurrTemperatureText.setBounds(545, 427, 109, 66);
+        lblCurrTemperatureText.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+        lblCurrTemperatureText.setBounds(451, 226, 58, 51);
         contentPane.add(lblCurrTemperatureText);
 
         JButton btnEditFavorites = new JButton("Edit Favorites");
@@ -124,7 +118,7 @@ public class UserCustomizedScreen extends JFrame {
 
             }
         });
-        btnEditFavorites.setBounds(10, 175, 152, 75);
+        btnEditFavorites.setBounds(0, 81, 152, 37);
         contentPane.add(btnEditFavorites);
 
         JButton btnLogout = new JButton("Logout");
@@ -135,12 +129,12 @@ public class UserCustomizedScreen extends JFrame {
 
             }
         });
-        btnLogout.setBounds(217, 175, 152, 75);
+        btnLogout.setBounds(162, 81, 152, 37);
         contentPane.add(btnLogout);
 
         JLabel lblWelcome = new JLabel("Welcome " + tempUser.getUsername());
         lblWelcome.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-        lblWelcome.setBounds(10, 30, 152, 66);
+        lblWelcome.setBounds(0, 0, 304, 37);
         contentPane.add(lblWelcome);
 
         JButton btn = new JButton("Refresh");
@@ -157,21 +151,25 @@ public class UserCustomizedScreen extends JFrame {
 
             }
         });
-        btn.setBounds(291, 341, 109, 53);
+        btn.setBounds(110, 366, 109, 53);
         contentPane.add(btn);
 
-        JButton btnHangouts = new JButton("Hangouts possibilities");
+        JButton btnHangouts = new JButton("Outdoor");
         btnHangouts.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(index==0)
+                    JOptionPane.showMessageDialog(new JFrame(), "you must select a city before you can use hangouts", "Dialog", JOptionPane.ERROR_MESSAGE);
+                else
+                    new HangoutDialogView(result);
 
-                HangoutDialogView hangoutDialogView = new HangoutDialogView(result);
             }
         });
-        btnHangouts.setBounds(291, 440, 182, 53);
+        btnHangouts.setBounds(0, 366, 100, 53);
         contentPane.add(btnHangouts);
         lblTime = new JLabel(rightNow.getTime().toString());
-        lblTime.setBounds(10, 40, 370, 140);
+        lblTime.setBounds(10, 37, 168, 37);
         getContentPane().add(lblTime);
+        setLocationRelativeTo(null);
         contentPane.setVisible(true);
 
 

@@ -69,8 +69,7 @@ public class ForgotPasswordView extends JDialog {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-
-                        //cancel//////
+                        dispose();
                     }
                 });
                 cancelButton.setActionCommand("Cancel");

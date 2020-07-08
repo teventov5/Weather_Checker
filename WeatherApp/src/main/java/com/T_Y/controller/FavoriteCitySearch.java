@@ -81,7 +81,7 @@ public class FavoriteCitySearch extends JDialog {
                         }
 
                         if (successFlag) {
-                            JOptionPane.showMessageDialog(new JFrame(), "successful favorite city update", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(new JFrame(), "successful favorite city update", "Dialog", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 });

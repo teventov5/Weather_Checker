@@ -164,8 +164,7 @@ public class AdminCustomizedScreen extends JFrame {
         btnHangouts.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                //hangouts dialog.
-
+                HangoutDialogView hangoutDialogView = new HangoutDialogView(result);
             }
         });
         btnHangouts.setBounds(291, 388, 182, 53);
@@ -184,6 +183,7 @@ public class AdminCustomizedScreen extends JFrame {
         });
         btnUserManagment.setBounds(291, 451, 152, 75);
         contentPane.add(btnUserManagment);
+        setLocationRelativeTo(null);
         contentPane.setVisible(true);
 
 

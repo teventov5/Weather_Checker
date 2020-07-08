@@ -58,24 +58,22 @@ public class UserManagement {
                 System.out.println("user password meets requirements");
                 new UsersDB().registerUserToDB(tempUser);
             } catch (Exception e2) {
-                JOptionPane.showMessageDialog(new JFrame(), e2.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
                 if (e2.getMessage() == "Registration Completed") {
+                    JOptionPane.showMessageDialog(new JFrame(), e2.getMessage(), "Dialog", JOptionPane.INFORMATION_MESSAGE);
                     try {
                         new UsersDB().insertFavoriteToDB(tempUser);
 
                     } catch (Exception e1) {
                         if (e1.getMessage() == "favorites table was updated") {
-                            UserCustomizedScreen userCustomizedScreen = new UserCustomizedScreen(tempUser);
-                            userCustomizedScreen.setVisible(true);
+                            return true;
                         }
                     }
-
-                    return true;
-
                 }
+                else
+                    JOptionPane.showMessageDialog(new JFrame(), e2.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e1) {
-            System.out.println(e1);
+            e1.printStackTrace();
         }
         return false;
     }
@@ -101,19 +99,12 @@ public class UserManagement {
 
     public boolean loginAdmin(User tempUser) throws SQLException, ClassNotFoundException, IOException {
         try {
-            new UsersDB().loginAdminToDB(tempUser);
-            AdminCustomizedScreen adminCustomizedScreen = new AdminCustomizedScreen(tempUser);
-            adminCustomizedScreen.setVisible(true);
-        } catch (Exception e1) {
-            System.out.println(e1);
-            JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
-            if (e1.getMessage() == "Admin Login Allowed") {
-                AdminCustomizedScreen adminCustomizedScreen = new AdminCustomizedScreen(tempUser);
-                adminCustomizedScreen.setVisible(true);
-                return true;
-            }
-
+           boolean loginSuccess= new UsersDB().loginAdminToDB(tempUser);
+           return loginSuccess;
         }
+        catch (Exception e1) {
+            e1.printStackTrace();
+            }
         return false;
     }
 
