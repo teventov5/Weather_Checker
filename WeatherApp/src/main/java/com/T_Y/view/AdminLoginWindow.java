@@ -56,11 +56,11 @@ public class AdminLoginWindow extends JFrame {
                     loginSucceed = new UserManagement().loginAdmin(tempUser);
                     if (loginSucceed) {
                         JOptionPane.showMessageDialog(new JFrame(), "Admin Login was successfully", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-                        dispose();
                         new AdminCustomizedScreen(tempUser);
+                        dispose();
                     }
                 } catch (Exception e1) {
-                   e1.printStackTrace();;
+                   e1.printStackTrace();
                 }
             }
         });

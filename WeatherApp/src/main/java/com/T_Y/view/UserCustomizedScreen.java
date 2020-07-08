@@ -58,6 +58,7 @@ public class UserCustomizedScreen extends JFrame {
                 //forcastResult result=new forcastResult(resultArr);
 
                 result = new CitySearch().searchForCityResult(favoritesList.getModel().getElementAt(index).toString());
+                if(result==null)throw new ArithmeticException("Could not find results for the city requested");
                 lblHeadlineText.setText(result.getHeadline()+" Weather");
                 lblCurrTemperatureText.setText(result.getMinTemperature()+"°");
                 try {
@@ -67,7 +68,7 @@ public class UserCustomizedScreen extends JFrame {
                     lblIcon.setBounds(270, 137, 100, 86);
                     contentPane.add(lblIcon);
                 } catch (IOException ex) {
-                    System.out.println(ex);
+                   ex.printStackTrace();
                 }
             }
         });

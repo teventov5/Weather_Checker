@@ -69,12 +69,12 @@ public class DeleteUserFromDbView extends JDialog {
                     closeButton.setActionCommand("Cancel");
                     buttonPane.add(closeButton);
                 }
-                JButton applyButton = new JButton("Apply");
+                JButton applyButton = new JButton("Delete");
                 applyButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) throws ArithmeticException {
                         try {
                             if (lblSuccessFlag.getForeground() == Color.red) {
-                                throw new ArithmeticException("cant apply without pressing the search button first");
+                                throw new ArithmeticException("cant Delete without pressing the search button first");
                             }
                         } catch (ArithmeticException e1) {
                             JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);

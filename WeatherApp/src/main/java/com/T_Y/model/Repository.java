@@ -52,6 +52,7 @@ public class Repository {
             arrOfHangouts[i] = temp;
         }
         arrOfHangouts[0].setHeadline(arrOfHangouts[0].getHeadline().substring(1));//first cell of arr needed special attention
+        arrOfHangouts[0].setRating(arrOfHangouts[0].getRating()+"0");//first cell of arr needed special attention
         return arrOfHangouts;
     }
 
@@ -75,16 +76,12 @@ public class Repository {
     private void updateCityHangoutHush(City ct, HangoutsResult[] resultsArr) {
         CityCodeHushMap.getInstance().getHangouts().put(ct.getCityCode(), resultsArr);
     }
-
-
     private void updateCityForecastsHush(City ct) {
         CityCodeHushMap.getInstance().getForecasts().put(ct.getCityCode(), ct.getResult());
 
     }
 
     public ForcastResult doHttpGet(City ct) {
-        //http://dataservice.accuweather.com/forecasts/v1/daily/1day/348735?apikey=<com.shar.controller.ApiKey>
-        //http://dataservice.accuweather.com/forecasts/v1/daily/1day/<CITYID>?apikey=<com.shar.controller.ApiKey>
 
         String url = "http://dataservice.accuweather.com/currentconditions/v1/" + ct.getCityCode() + "?apikey=" + ApiKey.getApiKey();
         CloseableHttpClient client = HttpClients.createDefault();

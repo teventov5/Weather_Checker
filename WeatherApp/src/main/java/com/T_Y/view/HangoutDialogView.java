@@ -1,34 +1,26 @@
+
 package com.T_Y.view;
 
 import com.T_Y.model.ForcastResult;
 import com.T_Y.model.HangoutsResult;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class HangoutDialogView extends JDialog {
 
     JLabel lblRatingText;
-    /**
-     * public static void main(String[] args) {
-     * EventQueue.invokeLater(new Runnable() {
-     * public void run() {
-     * try {
-     * hangoutDialogView dialog = new hangoutDialogView();
-     * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-     * dialog.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     * }
-     * });
-     * }
-     */
     private HangoutsResult[] allHangouts;
     private HangoutsResult specificHangout;
     private JLabel lblHeadlineText;
+    private BufferedImage image;
+    private ImageIcon icon;
 
 
     /**
@@ -36,8 +28,9 @@ public class HangoutDialogView extends JDialog {
      */
     public HangoutDialogView(ForcastResult ctRes) {
         setVisible(true);
+        JLabel lblIcon = new JLabel("");
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 546, 369);
+        setBounds(100, 100, 435, 268);
         getContentPane().setLayout(null);
         allHangouts = ctRes.getHangoutsResultsArr();
         JList hangoutList = new JList();
@@ -46,12 +39,25 @@ public class HangoutDialogView extends JDialog {
                 int index = hangoutList.getAnchorSelectionIndex();
                 //String [] resultArr={"31/05/2020","rainy","29","13"};
                 //forcastResult result=new forcastResult(resultArr);
-
-                // result =new citySearch().searchForCityResult( hangoutList.getModel().getElementAt(index).toString());
+                //result =new citySearch().searchForCityResult( hangoutList.getModel().getElementAt(index).toString());
                 specificHangout = allHangouts[index];
                 lblHeadlineText.setText(specificHangout.getHeadline());
                 lblRatingText.setText(specificHangout.getRating());
+                try {
+                    double value;
+                    value=Double.parseDouble(specificHangout.getRating());
+                    if(value>=6)
+                        image = ImageIO.read(new File("images\\" + "outside" + ".JPG"));
 
+                    else
+                        image = ImageIO.read(new File("images\\" + "home" + ".JPG"));
+                    icon = new ImageIcon(image);
+                    lblIcon.setIcon(icon);
+                    lblIcon.setBounds(270, 137, 100, 86);
+                    add(lblIcon);
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
             }
         });
         hangoutList.setModel(new AbstractListModel() {
@@ -59,7 +65,7 @@ public class HangoutDialogView extends JDialog {
 
             {
                 values = new String[] { "Flight delays", "Mosquito status", "Dust & Dander status", "Dog Walking Comfort", "Running", "Golf", "Tennis", "Hiking", "Bicycling", "Skateboarding", "Outdoor Concert", "Beach" +
-                                                                                                                                                                                                                   " & Pool" };
+                        " & Pool" };
 
             }
 
@@ -71,35 +77,27 @@ public class HangoutDialogView extends JDialog {
                 return values[index];
             }
         });
-        hangoutList.setBounds(33, 50, 114, 219);
+        hangoutList.setBounds(10, 11, 190, 219);
         getContentPane().add(hangoutList);
 
-        Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
-        rigidArea.setBounds(0, 0, 530, 339);
-        getContentPane().add(rigidArea);
-
-        JLabel lblHeadline = new JLabel("Headline");
-        lblHeadline.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblHeadline.setBounds(355, 11, 71, 42);
+        JLabel lblHeadline = new JLabel("Headline:");
+        lblHeadline.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
+        lblHeadline.setBounds(210, 35, 83, 42);
         getContentPane().add(lblHeadline);
 
         lblHeadlineText = new JLabel("");
-        lblHeadlineText.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblHeadlineText.setBounds(272, 63, 250, 100);
+        lblHeadlineText.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        lblHeadlineText.setBounds(295, 35, 116, 42);
         getContentPane().add(lblHeadlineText);
 
-        JLabel lblAccuweatherLink = new JLabel("view on accuWeather");
-        lblAccuweatherLink.setBounds(10, 307, 465, 14);
-        getContentPane().add(lblAccuweatherLink);
-
         lblRatingText = new JLabel("");
-        lblRatingText.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblRatingText.setBounds(340, 252, 124, 69);
+        lblRatingText.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        lblRatingText.setBounds(276, 88, 56, 42);
         getContentPane().add(lblRatingText);
 
-        JLabel lblRatingDesc = new JLabel("value in a 1-10 rating bar.");
+        JLabel lblRatingDesc = new JLabel("Rating:");
         lblRatingDesc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblRatingDesc.setBounds(272, 174, 203, 42);
+        lblRatingDesc.setBounds(210, 88, 62, 42);
         getContentPane().add(lblRatingDesc);
 
     }

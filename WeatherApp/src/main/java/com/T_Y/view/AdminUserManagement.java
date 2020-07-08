@@ -18,20 +18,11 @@ public class AdminUserManagement extends JFrame {
      */
     public AdminUserManagement() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 187, 426);
+        setBounds(100, 100, 157, 249);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        JButton btnUpdateUser = new JButton("Update user");
-        btnUpdateUser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //update user////
-            }
-        });
-        btnUpdateUser.setBounds(10, 155, 112, 62);
-        contentPane.add(btnUpdateUser);
 
         JButton btnViewUsers = new JButton("View users");
         btnViewUsers.addActionListener(new ActionListener() {
@@ -47,7 +38,7 @@ public class AdminUserManagement extends JFrame {
                 }
             }
         });
-        btnViewUsers.setBounds(10, 45, 112, 62);
+        btnViewUsers.setBounds(26, 28, 112, 62);
         contentPane.add(btnViewUsers);
 
         JButton btnDeleteUser = new JButton("Delete user");
@@ -56,23 +47,9 @@ public class AdminUserManagement extends JFrame {
                 DeleteUserFromDbView deleteUserFromDbView = new DeleteUserFromDbView();
             }
         });
-        btnDeleteUser.setBounds(10, 276, 112, 62);
+        btnDeleteUser.setBounds(26, 125, 112, 62);
         contentPane.add(btnDeleteUser);
+        setLocationRelativeTo(null);
     }
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AdminUserManagement frame = new AdminUserManagement();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 }
