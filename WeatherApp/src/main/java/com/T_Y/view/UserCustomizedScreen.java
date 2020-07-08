@@ -20,15 +20,15 @@ import java.util.Calendar;
 public class UserCustomizedScreen extends JFrame {
 
     public static Calendar rightNow;
-    private JPanel contentPane;
+    private  JPanel contentPane;
     private ForcastResult result;
-    private JLabel lblHeadlineText;
-    private JLabel lblCurrTemperatureText;
+    private  JLabel lblHeadlineText;
+    private  JLabel lblCurrTemperatureText;
     private BufferedImage image;
     private ImageIcon icon;
     private UserFavoritesView userFavoritesView;
-    private JLabel lblTime;
-    private int index=0;
+    private  JLabel lblTime;
+    private int index = 0;
 
     /**
      * Create the frame.
@@ -58,9 +58,9 @@ public class UserCustomizedScreen extends JFrame {
                 //forcastResult result=new forcastResult(resultArr);
 
                 result = new CitySearch().searchForCityResult(favoritesList.getModel().getElementAt(index).toString());
-                if(result==null)throw new ArithmeticException("Could not find results for the city requested");
-                lblHeadlineText.setText(result.getHeadline()+" Weather");
-                lblCurrTemperatureText.setText(result.getMinTemperature()+"°");
+                if (result == null) throw new ArithmeticException("Could not find results for the city requested");
+                lblHeadlineText.setText(result.getHeadline() + " Weather");
+                lblCurrTemperatureText.setText(result.getMinTemperature() + "°");
                 try {
                     image = ImageIO.read(new File("images\\" + result.getIconNumber() + ".png"));
                     icon = new ImageIcon(image);
@@ -68,12 +68,12 @@ public class UserCustomizedScreen extends JFrame {
                     lblIcon.setBounds(270, 137, 100, 86);
                     contentPane.add(lblIcon);
                 } catch (IOException ex) {
-                   ex.printStackTrace();
+                    ex.printStackTrace();
                 }
             }
         });
         favoritesList.setModel(new AbstractListModel() {
-            String[] values;
+            final String[] values;
 
             {
                 values = tempUser.getFavoritesArr();
@@ -114,7 +114,7 @@ public class UserCustomizedScreen extends JFrame {
                     new UserFavoritesView(tempUser);
                 } catch (Exception e1) {
                     userFavoritesView.setVisible(false);
-                   e1.printStackTrace();;
+                    e1.printStackTrace();
                 }
 
             }
@@ -158,7 +158,7 @@ public class UserCustomizedScreen extends JFrame {
         JButton btnHangouts = new JButton("Outdoor");
         btnHangouts.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(index==0)
+                if (index == 0)
                     JOptionPane.showMessageDialog(new JFrame(), "you must select a city before you can use hangouts", "Dialog", JOptionPane.ERROR_MESSAGE);
                 else
                     new HangoutDialogView(result);
