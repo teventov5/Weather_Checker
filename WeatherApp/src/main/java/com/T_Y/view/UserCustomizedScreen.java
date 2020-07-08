@@ -113,7 +113,7 @@ public class UserCustomizedScreen extends JFrame {
                     new UserFavoritesView(tempUser);
                 } catch (Exception e1) {
                     userFavoritesView.setVisible(false);
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
 
             }

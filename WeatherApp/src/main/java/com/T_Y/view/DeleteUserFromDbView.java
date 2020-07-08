@@ -129,8 +129,9 @@ public class DeleteUserFromDbView extends JDialog {
                                 throw new ArithmeticException("Username " + tempUser.getUsername() + "does not Exist");
                             }
                         } catch (Exception el) {
+                            el.printStackTrace();
+
                         }
-                        System.out.println(e);
                     }
                 });
                 btnSearch.setBounds(326, 29, 93, 34);

@@ -55,11 +55,12 @@ public class AdminLoginWindow extends JFrame {
                     User tempUser = new User(usernameInput, passwordInput);
                     loginSucceed = new UserManagement().loginAdmin(tempUser);
                     if (loginSucceed) {
-                        new AdminCustomizedScreen(tempUser);
+                        JOptionPane.showMessageDialog(new JFrame(), "Admin Login was successfully", "Dialog", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
+                        new AdminCustomizedScreen(tempUser);
                     }
                 } catch (Exception e1) {
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
             }
         });
@@ -86,19 +87,19 @@ public class AdminLoginWindow extends JFrame {
         passwordField.setBounds(116, 79, 148, 30);
         contentPane.add(passwordField);
 
-        JButton btnForgotPassword = new JButton("Press if you forgot your password");
+        /*JButton btnForgotPassword = new JButton("Press if you forgot your password");
         btnForgotPassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     new ForgotPasswordView();
                 } catch (Exception e1) {
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
             }
         });
         btnForgotPassword.setBounds(0, 205, 300, 23);
         contentPane.add(btnForgotPassword);
-
+ */
         JButton btnWelcome = new JButton("Press if you want to go back to welcome screen");
         btnWelcome.setBounds(0, 156, 300, 23);
         contentPane.add(btnWelcome);

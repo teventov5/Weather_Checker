@@ -54,7 +54,6 @@ public class AdminUserManagement extends JFrame {
         btnDeleteUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 DeleteUserFromDbView deleteUserFromDbView = new DeleteUserFromDbView();
-
             }
         });
         btnDeleteUser.setBounds(10, 276, 112, 62);

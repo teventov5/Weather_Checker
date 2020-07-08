@@ -33,6 +33,7 @@ public class AdminCustomizedScreen extends JFrame {
      * Create the frame.
      */
     public AdminCustomizedScreen(User tempUser) throws IOException {
+        setVisible(true);
         rightNow = Calendar.getInstance();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel lblIcon = new JLabel("");
@@ -119,7 +120,7 @@ public class AdminCustomizedScreen extends JFrame {
                     new UserFavoritesView(tempUser);
                 } catch (Exception e1) {
                     userFavoritesView.setVisible(false);
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
 
             }

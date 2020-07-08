@@ -56,7 +56,7 @@ public class ForgotPasswordView extends JDialog {
                                 JOptionPane.showMessageDialog(new JFrame(), "No such username", "Dialog", JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (Exception e1) {
-                            System.out.println(e1);
+                           e1.printStackTrace();;
                         }
 
                     }

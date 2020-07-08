@@ -34,7 +34,7 @@ public class CityCodeSearch {
                 this.updateCityCodeHush(ct);
 
             } catch (Exception e1) {
-                System.out.println(e1);
+               e1.printStackTrace();;
             }
         } catch (IOException ioe) {
             System.err.println("Something went wrong and we couldn't get the information you requested: ");

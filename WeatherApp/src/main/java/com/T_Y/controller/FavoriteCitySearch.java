@@ -130,8 +130,8 @@ public class FavoriteCitySearch extends JDialog {
                         throw new ArithmeticException("bad city input");
                     }
                 } catch (Exception el) {
+                    el.printStackTrace();
                 }
-                System.out.println(e);
             }
         });
         btnSearch.setBounds(326, 29, 93, 34);

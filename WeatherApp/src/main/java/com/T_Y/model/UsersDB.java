@@ -54,7 +54,7 @@ public class UsersDB {
         }
     }
 
-    public void loginUserToDB(User tempUser) throws ClassNotFoundException, SQLException, ArithmeticException {
+    public boolean loginUserToDB(User tempUser) throws ClassNotFoundException, SQLException, ArithmeticException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/weatherapp?autoReconnect=true&useSSL=false", "root", "");
         PreparedStatement sel = conn.prepareStatement("select username from users where username=? AND password=?");
@@ -65,7 +65,7 @@ public class UsersDB {
         if (!rs.next()) {
             throw new ArithmeticException("username or password is wrong");
         } else {
-            throw new ArithmeticException("Login Allowed");
+            return true;
         }
 
     }

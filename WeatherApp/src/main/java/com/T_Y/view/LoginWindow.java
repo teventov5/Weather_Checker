@@ -58,7 +58,7 @@ public class LoginWindow extends JFrame {
                         dispose();
                     }
                 } catch (Exception e1) {
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
             }
         });
@@ -91,7 +91,7 @@ public class LoginWindow extends JFrame {
                 try {
                     new ForgotPasswordView();
                 } catch (Exception e1) {
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
             }
         });

@@ -10,7 +10,7 @@ public class Main {
             new WelcomeWindow();
 
         } catch (Exception e) {
-            System.out.println(e);
+           e.printStackTrace();;
         }
 
 
