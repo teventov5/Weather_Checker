@@ -38,15 +38,11 @@ public class LoginWindow extends JFrame {
      */
     public LoginWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 799, 630);
+        setBounds(100, 100, 306, 369);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
-        rigidArea.setBounds(0, 11, 785, 582);
-        contentPane.add(rigidArea);
 
         JButton button = new JButton("Submit");
         button.addActionListener(new ActionListener() {
@@ -62,31 +58,31 @@ public class LoginWindow extends JFrame {
                         dispose();
                     }
                 } catch (Exception e1) {
-                    System.out.println(e1);
+                   e1.printStackTrace();;
                 }
             }
         });
-        button.setBounds(0, 304, 785, 278);
+        button.setBounds(0, 253, 300, 79);
         contentPane.add(button);
 
         JLabel label = new JLabel("Username:");
         label.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        label.setBounds(10, 69, 96, 14);
+        label.setBounds(10, 35, 96, 14);
         contentPane.add(label);
 
         usernameField = new JTextField();
         usernameField.setColumns(10);
-        usernameField.setBounds(116, 66, 148, 30);
+        usernameField.setBounds(116, 32, 148, 30);
         contentPane.add(usernameField);
 
         JLabel label_1 = new JLabel("Password:");
         label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        label_1.setBounds(10, 134, 89, 14);
+        label_1.setBounds(10, 80, 89, 14);
         contentPane.add(label_1);
 
         passwordField = new JPasswordField();
         passwordField.setColumns(10);
-        passwordField.setBounds(116, 133, 148, 30);
+        passwordField.setBounds(116, 79, 148, 30);
         contentPane.add(passwordField);
 
         JButton btnForgotPassword = new JButton("Press if you forgot your password");
@@ -95,14 +91,27 @@ public class LoginWindow extends JFrame {
                 try {
                     new ForgotPasswordView();
                 } catch (Exception e1) {
-                    System.out.println(e1);
+                   e1.printStackTrace();;
+                }
+            }
+        });
+        btnForgotPassword.setBounds(0, 205, 300, 23);
+        contentPane.add(btnForgotPassword);
+
+        JButton btnWelcome = new JButton("Press if you want to go back to welcome screen");
+        btnWelcome.setBounds(0, 156, 300, 23);
+        contentPane.add(btnWelcome);
+        btnWelcome.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new WelcomeWindow();
+                    dispose();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
 
                 }
             }
         });
-        btnForgotPassword.setBounds(36, 223, 254, 23);
-        contentPane.add(btnForgotPassword);
-
         setLocationRelativeTo(null);
     }
 }

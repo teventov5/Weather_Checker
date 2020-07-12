@@ -69,9 +69,12 @@ public class FavoriteCitySearch extends JDialog {
                         String[] currFavoriteArr = tempUser.getFavoritesArr();
                         for (int i = 1; i < currFavoriteArr.length; i++) {
                             if (currFavoriteArr[i].equalsIgnoreCase(tempCT.getCityName())) {
-                                throw new ArithmeticException("city already exists for username " + tempUser.getUsername());
+                                JOptionPane.showMessageDialog(new JFrame(),"city already exists for username " + tempUser.getUsername(), "Dialog", JOptionPane.ERROR_MESSAGE);
+                                return;
                             }
+
                         }
+
                         try {
                             successFlag = new UsersDB().editUserDbFavorites(tempUser, index, tempCT);
                         } catch (SQLException throwables) {
@@ -80,8 +83,9 @@ public class FavoriteCitySearch extends JDialog {
                             classNotFoundException.printStackTrace();
                         }
 
+
                         if (successFlag) {
-                            JOptionPane.showMessageDialog(new JFrame(), "successful favorite city update", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(new JFrame(), "successful favorite city update", "Dialog", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 });
@@ -130,8 +134,8 @@ public class FavoriteCitySearch extends JDialog {
                         throw new ArithmeticException("bad city input");
                     }
                 } catch (Exception el) {
+                    el.printStackTrace();
                 }
-                System.out.println(e);
             }
         });
         btnSearch.setBounds(326, 29, 93, 34);

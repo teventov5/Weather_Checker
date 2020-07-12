@@ -35,7 +35,7 @@ public class Repository {
         arrOfStr2[0] = arrOfStr[0].substring(122);
         arrOfStr2[1] = arrOfStr[18].substring(135);
         arrOfStr2[2] = arrOfStr[19].substring(132);
-        arrOfStr2[3] = arrOfStr[arrOfStr.length - 3].substring(137);//TODO fix this
+        arrOfStr2[3] = arrOfStr[arrOfStr.length - 3].substring(137);
         arrOfStr2[4] = arrOfStr[2].substring(124);
         arrOfStr2[5] = arrOfStr[6].substring(129);
         arrOfStr2[6] = arrOfStr[7].substring(123);
@@ -51,51 +51,37 @@ public class Repository {
             HangoutsResult temp = new HangoutsResult(arrOfStr2[i].substring(23, arrOfStr2[i].indexOf(",", 24) - 1), arrOfStr2[i].substring(7, arrOfStr2[0].indexOf(",") - 1));
             arrOfHangouts[i] = temp;
         }
+        arrOfHangouts[0].setHeadline(arrOfHangouts[0].getHeadline().substring(1));//first cell of arr needed special attention
+        arrOfHangouts[0].setRating(arrOfHangouts[0].getRating()+"0");//first cell of arr needed special attention
         return arrOfHangouts;
     }
 
     private boolean resultHushCheck(City ct) {
         if (CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()) != null) {
-            long hashTime = CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()).getTime();
-            //currTime=currTime*1000;
-            long currTime = UserCustomizedScreen.rightNow.getTimeInMillis();
-            currTime = currTime / 1000;
-            if (currTime - hashTime < 60000) {
                 ct.setResult(CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()));
                 return true;
-            } else {
-                CityCodeHushMap.getInstance().getForecasts().remove(ct.getCityCode());
             }
-        }
         return false;
-    }
+        }
+
 
     private boolean hangoutHushCheck(City ct) {
         if (CityCodeHushMap.getInstance().getHangouts().get(ct.getCityCode()) != null) {
-            //long hashTime=CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()).getTime();
-            //currTime=currTime*1000;
-            //long currTime=userCustomizedScreen.rightNow.getTimeInMillis();
-            //currTime=currTime/1000;
             ct.setResult(CityCodeHushMap.getInstance().getForecasts().get(ct.getCityCode()));
             return true;
-        } else {
-            return false;
         }
+            return false;
     }
 
     private void updateCityHangoutHush(City ct, HangoutsResult[] resultsArr) {
         CityCodeHushMap.getInstance().getHangouts().put(ct.getCityCode(), resultsArr);
     }
-
-
     private void updateCityForecastsHush(City ct) {
         CityCodeHushMap.getInstance().getForecasts().put(ct.getCityCode(), ct.getResult());
 
     }
 
     public ForcastResult doHttpGet(City ct) {
-        //http://dataservice.accuweather.com/forecasts/v1/daily/1day/348735?apikey=<com.shar.controller.ApiKey>
-        //http://dataservice.accuweather.com/forecasts/v1/daily/1day/<CITYID>?apikey=<com.shar.controller.ApiKey>
 
         String url = "http://dataservice.accuweather.com/currentconditions/v1/" + ct.getCityCode() + "?apikey=" + ApiKey.getApiKey();
         CloseableHttpClient client = HttpClients.createDefault();
@@ -117,7 +103,7 @@ public class Repository {
 
 
             } catch (Exception e1) {
-                System.out.println(e1);
+               e1.printStackTrace();;
             }
         } catch (IOException ioe) {
             System.err.println("Something went wrong and we couldn't get the information you requested: ");
@@ -153,7 +139,7 @@ public class Repository {
 
 
             } catch (Exception e1) {
-                System.out.println(e1);
+               e1.printStackTrace();;
             }
         } catch (IOException ioe) {
             System.err.println("Something went wrong and we couldn't get the information you requested: ");

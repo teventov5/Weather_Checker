@@ -56,7 +56,7 @@ public class ForgotPasswordView extends JDialog {
                                 JOptionPane.showMessageDialog(new JFrame(), "No such username", "Dialog", JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (Exception e1) {
-                            System.out.println(e1);
+                           e1.printStackTrace();;
                         }
 
                     }
@@ -69,8 +69,7 @@ public class ForgotPasswordView extends JDialog {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-
-                        //cancel//////
+                        dispose();
                     }
                 });
                 cancelButton.setActionCommand("Cancel");

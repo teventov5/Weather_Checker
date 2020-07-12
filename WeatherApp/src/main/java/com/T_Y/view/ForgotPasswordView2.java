@@ -76,7 +76,7 @@ public class ForgotPasswordView2 extends JDialog {
                             }
 
                         } catch (ArithmeticException e1) {
-                            System.out.println(e1);
+                           e1.printStackTrace();;
 
                         }
                     }

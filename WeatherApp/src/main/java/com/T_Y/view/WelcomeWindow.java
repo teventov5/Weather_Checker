@@ -17,7 +17,7 @@ public class WelcomeWindow {
      */
     public WelcomeWindow() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 450, 300);
+        frame.setBounds(100, 100, 450, 220);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.addWindowListener(new WindowAdapter() {
@@ -46,17 +46,10 @@ public class WelcomeWindow {
             }
 
         });
-        btnLogin.setBounds(53, 177, 124, 23);
+        btnLogin.setBounds(41, 109, 124, 23);
         frame.getContentPane().add(btnLogin);
         JButton btnAdminLogin = new JButton("Admin Login");
-        btnAdminLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                AdminLoginWindow AdminLoginWindow = new AdminLoginWindow();
-                frame.setVisible(false);
-            }
-        });
-        btnLogin.addMouseListener(new MouseAdapter() {
+        btnAdminLogin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 lblInfo.setText(convertToMultiline("Use this button to go to Admin login page"));
@@ -68,20 +61,20 @@ public class WelcomeWindow {
             }
 
             public void mouseClicked(MouseEvent e1) {
-                LoginWindow LoginWindow = new LoginWindow();
+                new AdminLoginWindow();
                 frame.setVisible(false);
             }
 
         });
 
-        btnAdminLogin.setBounds(130, 229, 168, 23);
+        btnAdminLogin.setBounds(130, 158, 168, 23);
         frame.getContentPane().add(btnAdminLogin);
         JButton btnRegister = new JButton("Register");
 
         btnRegister.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                lblInfo.setText(convertToMultiline("Use this button to go to registration page"));
+                lblInfo.setText(convertToMultiline("Use this button to go to User registration page"));
             }
 
             @Override
@@ -96,32 +89,18 @@ public class WelcomeWindow {
             }
 
         });
-        btnRegister.setBounds(243, 177, 138, 23);
+        btnRegister.setBounds(243, 109, 138, 23);
         frame.getContentPane().add(btnRegister);
 
         lblInfo = new JLabel("");
-        lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblInfo.setBounds(53, 11, 343, 123);
+        lblInfo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        lblInfo.setBounds(41, 11, 343, 87);
         frame.getContentPane().add(lblInfo);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
 
-    /**
-     * public static void main(String[] args) {
-     * EventQueue.invokeLater(new Runnable() {
-     * public void run() {
-     * try {
-     * window = new com.shar.view.WelcomeWindow();
-     * window.frame.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     * }
-     * });
-     * }
-     */
     public static String convertToMultiline(String orig) {
         return "<html>" + orig.replaceAll("\n", "<br>");
     }

@@ -15,6 +15,7 @@ public class UserManagement {
     private FavoriteCitySearch dialog;
     private DeleteUserFromDbView dialog2;
     private boolean isRealUser = false;
+    private JFrame errorMessage;
 
     public UserManagement() {
     }
@@ -58,62 +59,48 @@ public class UserManagement {
                 System.out.println("user password meets requirements");
                 new UsersDB().registerUserToDB(tempUser);
             } catch (Exception e2) {
-                JOptionPane.showMessageDialog(new JFrame(), e2.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
                 if (e2.getMessage() == "Registration Completed") {
+                    JOptionPane.showMessageDialog(errorMessage, e2.getMessage(), "Dialog", JOptionPane.INFORMATION_MESSAGE);
                     try {
                         new UsersDB().insertFavoriteToDB(tempUser);
 
                     } catch (Exception e1) {
                         if (e1.getMessage() == "favorites table was updated") {
-                            UserCustomizedScreen userCustomizedScreen = new UserCustomizedScreen(tempUser);
-                            userCustomizedScreen.setVisible(true);
+                            return true;
                         }
                     }
-
-                    return true;
-
                 }
+                else
+                    JOptionPane.showMessageDialog(errorMessage, e2.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e1) {
-            System.out.println(e1);
+            e1.printStackTrace();
         }
         return false;
     }
 
     public boolean loginUser(User tempUser) throws SQLException, ClassNotFoundException, IOException {
         try {
-            new UsersDB().loginUserToDB(tempUser);
-            UserCustomizedScreen userCustomizedScreen = new UserCustomizedScreen(tempUser);
-            userCustomizedScreen.setVisible(true);
-        } catch (Exception e1) {
-            System.out.println(e1);
-            JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Dialog", JOptionPane.INFORMATION_MESSAGE);
-            if (e1.getMessage() == "Login Allowed") {
-
-                UserCustomizedScreen userCustomizedScreen = new UserCustomizedScreen(tempUser);
-                userCustomizedScreen.setVisible(true);
+            if(new UsersDB().loginUserToDB(tempUser)) {
+                JOptionPane.showMessageDialog(errorMessage, "Login Allowed", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+                new UserCustomizedScreen(tempUser);
                 return true;
             }
-
+        } catch (Exception e1) {
+           e1.printStackTrace();
+            JOptionPane.showMessageDialog(errorMessage, e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
 
     public boolean loginAdmin(User tempUser) throws SQLException, ClassNotFoundException, IOException {
         try {
-            new UsersDB().loginAdminToDB(tempUser);
-            AdminCustomizedScreen adminCustomizedScreen = new AdminCustomizedScreen(tempUser);
-            adminCustomizedScreen.setVisible(true);
-        } catch (Exception e1) {
-            System.out.println(e1);
-            JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
-            if (e1.getMessage() == "Admin Login Allowed") {
-                AdminCustomizedScreen adminCustomizedScreen = new AdminCustomizedScreen(tempUser);
-                adminCustomizedScreen.setVisible(true);
-                return true;
-            }
-
+           boolean loginSuccess= new UsersDB().loginAdminToDB(tempUser);
+           return loginSuccess;
         }
+        catch (ArithmeticException e1) {
+            e1.printStackTrace();
+            }
         return false;
     }
 
@@ -122,10 +109,10 @@ public class UserManagement {
             try {
                 return (new UsersDB().showUserDbFavorites(tempUser));
             } catch (Exception e2) {
-                System.out.println(e2);
+               e2.printStackTrace();;
             }
         } catch (Exception e1) {
-            System.out.println(e1);
+           e1.printStackTrace();;
         }
         return tempUser.getFavoritesArr();
     }
@@ -148,7 +135,7 @@ public class UserManagement {
                 return true;
             }
         } catch (Exception e1) {
-            JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(errorMessage, e1.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
 
             return false;
         }
